@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>A Mapping Application</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" href="https://api.mapworks.io/studio/latest/css/studio-core.css">
+		<script src="https://api.mapworks.io/studio/latest/js/studio-core.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<style type="text/css">
+			body, html {
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+			}
+
+			#mapworks-map {
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+		<div id="mapworks-map"></div>
+		<script type="text/javascript">
+			var map = new Studio.core.Map("#mapworks-map", {
+				// Your API key.
+				// 1. Login to the Mapworks application (https://app.mapworks.io).
+				// 2. Click on "Settings" (the cog icon).
+				// 3. Click "API Keys".
+				// 4. Click "Create API Key".
+				// 5. Enter an API key name.
+				// 6. Search and add content that you want to API to have access to.
+				// 7. Click the "Create" button.
+				// 8. Copy and replace below with your api key.
+				apiKey: "AStBVlM5TGU4ZU5USldqckxLT0RZZi8yMjk1MnRNRVQtbWRXMUJTSmk1dVBRQ8Hs8gqDcuLKaXX/99HEcW450ZLI4ZcgnIoAo50WVo/reJqlsQ",
+
+				// The map identifier of the map that was added to the API key.
+				map: "AVIz8Sn_NkycPmrP2gMy",
+
+				// Enable or disable the Navigation Control UI.
+				navigationControl: true,
+
+				// Enable or disable the Scale Control UI.
+				scaleControl: true,
+
+				// Enable or disable the Tooltip Control.
+				tooltipControl: true,
+
+				// Enable or disable the Zoom Control UI.
+				zoomControl: true
+			}).load(function() { // Load the map
+			});
+
+			// Call when the map has finished
+			map.once('ready', function() {
+				// Create the layer
+				var layer = new Studio.core.entity.TreeVectorLayerEntity({
+					visible: true
+				}, {
+					map: map
+				});
+
+				map.getTree().add(layer);
+				map.setViewCenter(115.85541616994009, -31.954543192882383, 30000);
+
+				// Draw some features
+				map.createPoint(115.856871, -31.9635701708822, layer);
+				map.createPoint(115.8551432, -31.96434151915544, layer);
+				map.createPoint(115.855416, -31.96634740155249, layer);
+				map.createPoint(115.8575076, -31.96727312644149, layer);
+				map.createPoint(115.8589626, -31.965884535607742, layer);
+				map.createPoint(115.8585078, -31.964187283954324, layer);
+				map.createPolyline([115.8503236, 115.8656918, 115.8729666, 115.8770588, 115.885152, 115.8897898, 115.8855158], [-31.96503582886565, -31.973136060185436, -31.96897032105072, -31.970281837530667, -31.967118896164994, -31.961332783076426, -31.959944102405597], 7, layer);
+				map.createPolygon([115.851142, 115.8585988, 115.8773316, 115.8828786, 115.8829696, 115.8805144, 115.8686926, 115.8605084, 115.851142], [-31.940268361357855, -31.959018303625452, -31.96457295630886, -31.96233576261631, -31.954311789268584, -31.944975425471377, -31.940808408864186, -31.939187917381002, -31.940268361357855], 9, layer);
+				map.createCircle(115.8395024, -31.949836677737895, 0.01, layer);
+
+			// create the style
+				var layerStyles = new Studio.core.entity.LayerStylesEntity({
+					"myStyle": {
+						"default": {
+							"pointWidth": 6,
+							"pointFill": "#FF7F50",
+							"pointLineWidth": 1,
+							"pointLineFill": "#FF0000",
+							"polygonOpacity": 0.5,
+							"lineWidth": [2],
+							"lineFill": "#0000CD",
+							"polygonFill": "#00FA9A"
+						}
+					}
+				});
+
+				// set the style
+				layer.setStyles(layerStyles);
+			});
+
+		</script>
+	</body>
+</html>
+
